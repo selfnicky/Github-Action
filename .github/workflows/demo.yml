@@ -1,0 +1,48 @@
+name: Demo Pipeline
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  setup_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Create file
+        run: touch github_action_file.txt
+        
+      - name: Print hello world
+        run: echo "hello world"
+        
+      - name: List files
+        run: ls -la
+        
+      - name: Display README if exists
+        run: |
+          if [ -f "./README.md" ]; then
+            cat ./README.md
+          else
+            echo "README.md not found"
+          fi
+  
+  build_job:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Display hello
+        run: echo "hello from Windows"
+  
+  deploy_job:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Display hello
+        run: echo "hello from macOS"
