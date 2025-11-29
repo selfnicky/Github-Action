@@ -21,7 +21,7 @@ jobs:
       - name: print hello world
         run: echo "hello world"
       - name: display readme file
-        run: cat ./README.md
+        run: cat README.md
   
   build_job:
     runs-on: windows-latest
