@@ -1,48 +1,40 @@
-name: Demo Pipeline
+name: Demo pipeline  
 on:
   push:
-    branches: [ main, dev ]
+    branches:
+      - main
+      - dev
   pull_request:
-    branches: [ main, dev ]
-
+    branches:
+      - main
+      - dev
+  schedule:
+    - cron: '0 0 * * 0'  # Runs every Sunday at midnight 
 jobs:
   setup_job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
-      - name: Create file
+      - name: create file
         run: touch github_action_file.txt
-        
-      - name: Print hello world
+      - name: print hello world
         run: echo "hello world"
-        
-      - name: List files
-        run: ls -la
-        
-      - name: Display README if exists
-        run: |
-          if [ -f "./README.md" ]; then
-            cat ./README.md
-          else
-            echo "README.md not found"
-          fi
+      - name: display readme file
+        run: cat ./README.md
   
   build_job:
     runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
-      - name: Display hello
-        run: echo "hello from Windows"
+      - name: display hello
+        run: echo "hello"
   
   deploy_job:
     runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
-      - name: Display hello
-        run: echo "hello from macOS"
+      - name: display hello
+        run: echo "hello"
